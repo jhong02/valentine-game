@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>my-app</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        function showMessage(choice) {
+            const messages = {
+                yes: {
+                    title: "'OMG!!!!'",
+                    text: "'Are you sure?? I am known for being weird and smelly'",
+                    options: [
+                        { text: "Of course! ❤️", next: "Of course! ❤️" },
+                        { text: "I don’t like smelly people", next: "I don’t like smelly people" }
+                    ]
+                },
+
+                no: { next: "YOU SHOULD BE SHOWERING EVERYDAY!!!!" },
+
+                "Of course! ❤️": {
+                    title: "'I’m also incredibly forgetful and clumsy'",
+                    text: "'It’s a very concerning issue of mine'",
+                    options: [
+                        { text: "Still yes!", next: "Still yes!" },
+                        { text: "You seem like you’d drop lettuce and guac on the floor…", next: "YOU SHOULD BE SHOWERING EVERYDAY!!!!" }
+                    ]
+                },
+
+                "Still yes!": {
+                    title: "'I’M SO HAPPY!!!'",
+                    text: "'Let’s go on the date RIGHT NOW!'",
+                    options: [
+                        { text: "Go on the date with the odd boy.", next: "dateStart" },
+                        { text: "On second thought you're WEIRD and I don't like you", next: "YOU SHOULD BE SHOWERING EVERYDAY!!!!" }
+                    ]
+                },
+
+                // Start of Date Path
+                dateStart: {
+                    title: "'Hmm, where should we go?!'",
+                    text: "'How about you choose? :D'",
+                    options: [
+                        { text: "Let’s go eat something!", next: "food1" },
+                        { text: "Let’s go do an activity!", next: "activity" }
+                    ]
+                },
+
+                // Food Path Loop
+                food1: {
+                    title: "'Ok!'",
+                    text: "'What are you craving?'",
+                    options: [
+                        { text: "mmmmm idk you choose", next: "food2" },
+                        { text: "i’m just a girl", next: "food2" },
+                    ]
+                },
+
+                food2: {
+                    title: "'Korean? Japanese? American? Italian?'",
+                    text: " ",
+                    options: [
+                        { text: "nahhh none of those", next: "food3" },
+                        { text: "im ok with anything~", next: "food3" },
+                    ]
+                },
+
+                food3: {
+                    title: "'Mexican? Chinese? Vietnamese? Thai?'",
+                    text: " ",
+                    options: [
+                        { text: "not really feeeeling those", next: "food4" },
+                        { text: "whatever you want~", next: "food4" },
+                    ]
+                },
+
+                food4: {
+                    title: "'Indian? French? Spanish? African?'",
+                    text: " ",
+                    options: [
+                        { text: "naah not those", next: "food5" },
+                        { text: "maybe something else~", next: "food5" },
+                    ]
+                },
+
+                // Restaurant Selection Page
+                food5: {
+                    title: "'OK WE’RE GOING HERE:'",
+                    text: "'They've got this thing called the Triple Dipper mmmm'",
+                    image: "restaurant.png", // Image support
+                    options: [{ text: "Ok sure", next: "badEndPicky" }],
+                    specialClass: "image-page"
+                },
+
+                badEndPicky: {
+                    title: "You end up HATING the food and DYING from it's salt content.",
+                    text: "Bad ending 2: Chilli's",
+                    image : "chillis-skeleton.png",
+                    specialClass: "image-page",
+                    badEnd: true
+                },
+
+                //Start of activity path
+                activity: {
+                    title: "'OO OK!! I had these in mind:'",
+                    text: "'Do you wanna go to the Zoo or the Wastewater Treatment Facitility?'",
+                    options: [
+                    { text: "Go to the Zoo.", next: "zoo1" },
+                    { text: "Go to the Wastewater Treatment Facitility", next: "waste1" },
+                    ]
+                },
+
+                waste1: {
+                    title: "'Isn't this place fuckin awesome?'",
+                    text: "You feel the strongest urge to push the boy into the waste water below",
+                    image : "vat.png",
+                    specialClass: "image-page",
+                    options: [
+                        { text: "Push him.", next: "wastePush" },
+                        { text: "Resist your urges.", next: "wasteNopush" },
+                    ]
+                },
+
+                wastePush: {
+                    title: "You push the boy into the huge vat",
+                    text: "He emerges with PASTY white skin and GREEN hair",
+                    
+                    image : "joker.png",
+                    specialClass: "image-page",
+                    options: [
+                        { text: "Ask if he's alright", next: "wasteBadend" },
+                    ]
+                },
+
+                wasteBadend: {
+                    title: "He screams at you nonsense and jumps out of a window",
+                    text: "Bad end 4: He just turns into the Joker.",
+                    image : "jokerbeat.gif",
+                    specialClass: "image-page",
+                    badEnd: true
+                },
+
+                wasteNopush: {
+                    title: "You stop yourself from pushing him into the nasty water.",
+                    text: "You both then enjoy the tour, learning how your waste water gets treated and recyled.",
+                    image : "yoshi.png",
+                    specialClass: "image-page",
+                },
+
+                zoo1: {
+                    title: "'YIPPPEE!!'",
+                    text: "'We're at the ZOO!! Where do you wanna go first???'",
+                    options: [
+                        { text: "Let's go to the Giraffes", next: "zoo2" },
+                        { text: "Let's go see the LIONS", next: "zoo3" },
+                    ]
+                },
+
+                zoo2: {
+                    title: "'this animal is so WEIRD i love it.'",
+                    text: "You notice the boy's shoelaces are untied",
+                    image : "giraffe.gif",
+                    specialClass: "image-page",
+                    options: [
+                        { text: "Tell him his shoes are untied", next: "zooShoes" },
+                        { text: "Do nothing and let him enjoy the awesome creatures.", next: "zooNothing" },
+                    ]
+                },
+
+                zooShoes: {
+                    title: "You tell him his shoes are untied...wonder why he's wearing those.",
+                    text: "'omg thank you I could have tripped and fell into the exhibit heh'",
+                    image : "shoes.png",
+                    specialClass: "image-page",
+                    options: [
+                        { text: "Continue your day with the boy at the ZOO!", next: "zooGoodend" },
+                    ]
+                },
+
+                zooGoodend: {
+                    title: "You both enjoy the animals and snacks and kiss all day ❤️❤️",
+                    text: "Good Ending: Zoo Date!",
+                    image : "zoogood.png",
+                    specialClass: "image-page",
+                },
+
+                zooNothing: {
+                    title: "You ignore his untied shoes",
+                    text: "The boy then proceeds to get too excited, tripping over them and falling into the exhibit",
+                    options: [
+                        { text: "The giraffes have noticed his presence...", next: "zooBad" },
+                    ]
+                },
+
+                zooBad: {
+                    title: "The animals one-by-one begin to comically stomp on the poor boy",
+                    text: "Bad Ending 3: Death by Giraffe",
+                    image : "grave.png",
+                    specialClass: "image-page",
+                    badEnd:true,
+                },
+
+                zoo3: {
+                    title: "You head to the Lion Exhibit",
+                    text: "'These animals are kinda HOT don't you think?",
+                    image : "lion.png",
+                    specialClass: "image-page",
+                    options: [
+                        { text: "WHAT????", next: "zooBad2" },
+                    ]
+                },
+
+                zooBad2: {
+                    title: "You dropkick the boy into the exhibit",
+                    text: "Bad Ending 3: Death by Lion",
+                    image : "grave.png",
+                    specialClass: "image-page",
+                    badEnd:true,
+                },
+
+                "I don’t like smelly people": {
+                    title: "'Wait!'",
+                    text: "'I can shower at least every other day!!'",
+                    options: [
+                        { text: "Hmm, I GUESS that’s enough", next: "Still yes!" },
+                        { text: "YOU SHOULD BE SHOWERING EVERYDAY!!!!", next: "YOU SHOULD BE SHOWERING EVERYDAY!!!!" }
+                    ]
+                },
+
+                "YOU SHOULD BE SHOWERING EVERYDAY!!!!": {
+                    title: "'I KNEW IT YOU HATE ME'",
+                    text: "*The boy runs away with stink lines following behind*",
+                    badEnd: true
+                }
+            };
+
+            let message = messages[choice];
+
+            if (!message) return;
+
+            let centerBox = document.querySelector(".center-box");
+            centerBox.className = "center-box"; // Reset classes
+            if (message.specialClass) {
+                centerBox.classList.add(message.specialClass);
+            }
+
+            document.querySelector("h1").innerText = message.title || "I KNEW IT YOU HATE ME";
+            document.querySelector("p").innerText = message.text || "*The boy runs away with stink lines following behind*";
+
+            let buttonContainer = document.querySelector(".button-container");
+            buttonContainer.innerHTML = ""; // Clear previous buttons
+
+            // Display image if present
+            if (message.image) {
+                let imgContainer = document.createElement("div");
+                imgContainer.className = "image-container";
+
+                let img = document.createElement("img");
+                img.src = `images/${message.image}`;
+                img.alt = "Restaurant Image";
+                img.style.width = "100%";
+                img.style.borderRadius = "10px";
+                img.style.marginTop = "10px";
+
+                imgContainer.appendChild(img);
+                buttonContainer.appendChild(imgContainer);
+            }
+
+            if (message.badEnd) {
+                let badEndText = document.createElement("p");
+                badEndText.innerText = "Bad End";
+                badEndText.style.color = "red";
+                badEndText.style.fontWeight = "bold";
+                badEndText.style.marginTop = "20px";
+                buttonContainer.appendChild(badEndText);
+            } else {
+                message.options?.forEach(option => {
+                    let btn = document.createElement("button");
+                    btn.className = "valentine-btn";
+                    btn.innerText = option.text;
+                    btn.onclick = () => showMessage(option.next);
+                    buttonContainer.appendChild(btn);
+                });
+            }
+
+            // Add "Go Back" button
+            if (!document.getElementById("goBackBtn")) {
+                let goBackBtn = document.createElement("button");
+                goBackBtn.innerText = "Go Back 🔄";
+                goBackBtn.className = "valentine-btn go-back";
+                goBackBtn.id = "goBackBtn";
+                goBackBtn.onclick = resetPage;
+                centerBox.appendChild(goBackBtn);
+            }
+        }
+
+        function resetPage() {
+    let centerBox = document.querySelector(".center-box");
+
+    // Remove any special classes (e.g., image-page)
+    centerBox.className = "center-box";
+
+    // Reset content
+    document.querySelector("h1").innerText = "Would you be my Valentine?:)))";
+    document.querySelector("p").innerText = "Choose wisely....";
+
+    let buttonContainer = document.querySelector(".button-container");
+    buttonContainer.innerHTML = `
+        <button class="valentine-btn" onclick="showMessage('yes')">Yes</button>
+        <button class="valentine-btn no-btn" onclick="showMessage('no')">No</button>
+    `;
+
+    // Remove "Go Back" button
+    let goBackBtn = document.getElementById("goBackBtn");
+    if (goBackBtn) goBackBtn.remove();
+}
+    </script>
+
+</head>
+
+<body>
+    <div class="center-box">
+        <img src="images/bannerribbon.gif" alt="Ribbon Banner" class="ribbon">
+        <h1>Would you be my Valentine?:)))</h1>
+        <p>Choose wisely....</p>
+        <div class="button-container">
+            <button class="valentine-btn" onclick="showMessage('yes')">Yes</button>
+            <button class="valentine-btn no-btn" onclick="showMessage('no')">No</button>
+        </div>
+    </div>
+</body>
+
+</html>
